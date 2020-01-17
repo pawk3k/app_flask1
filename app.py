@@ -13,8 +13,11 @@ import matplotlib.pyplot as plt
 import io
 import json
 from flask import Flask, render_template, request, Response
-
-
+# from flask_wtf import Form
+# from flask_wtf import Form
+from wtforms import StringField, PasswordField
+from wtforms.validators import InputRequired, Email, Length, AnyOf
+from flask_bootstrap import Bootstrap
 class PID:
     def __init__(self, Kp, Ki, Kd):
         self.Kp, self.Ki, self.Kd = Kp, Ki, Kd
@@ -105,8 +108,9 @@ def random_plot(n):
 
 
 app = Flask(__name__)
+from flask_bootstrap import Bootstrap
 app.config['FLASK_DEBUG'] = True
-
+Bootstrap(app)
 
 
 @app.route('/')
