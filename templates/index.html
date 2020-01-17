@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+    function reload() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("mimg").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("POST", "/data", true);
+        const form1= document.getElementById('forma');
+        let elements = form1.querySelector("input");
+        const len = document.getElementById("forma").length;
+        const elements1 = document.getElementById("forma").elements;
+        let obj = {};
+        for (let i = 0; i < len-1; i++) {
+            obj[elements1[i].name] = elements1[i].value
+		}
+		{#return JSON.stringify( obj );#}
+
+        {#let json_o = Object.values(form1).reduce((obj,field) => { obj[field.name] = field.value; return obj }, {});#}
+        {#const data = JSON.stringify(json_o.serializeArray());#}
+        xhttp.send(JSON.stringify(obj));
+    }
+    </script>
+    <style>
+#mimg{
+    margin-left: 800px;
+}
+
+    body{
+        width: 100%;
+        height: 100%;
+        background-image: url("/static/shar3.jpg");
+        backgorund-size:100%;
+        background-repeat: no-repeat;
+    }
+    form{
+        float: left;
+    }
+    p{
+        width: 150px;
+        height: 40px;
+    }
+    </style>
+
+</head>
+<body>
+    <form id="forma">
+{#        <p>Liczba punktów: <input type="text" name="npoints" id="npoints" value="10"/></p>#}
+
+<p>tmax: <input name="tmax" type="text" value="200" id = "tmax"/></p>
+<p>m: <input name="m" type="text" value="750"/></p>
+<p>b: <input name="b" type="text" value="190"/></p>
+<p>y0: <input name="y0" type="text" value="0"/></p>
+<p>v0: <input name="v0" type="text" value="0"/></p>
+<p>target: <input name="target" type="text" value="100"/></p>
+<p>v_opt: <input name="v_opt" type="text" value="3.5"/></p>
+<p>f_max: <input name="f_max" type="text" value="3000"/></p>
+<p>user_r_h: <input name="use_r_h" type="text" value="1"/></p>
+        <input type="button" onclick="reload()" value="send"/>
+{#<p><input type="submit" onclick="reload()"  value="submit"/></p>#}
+</form>
+
+    <div id="mimg"></div>
+</body>
+</html>
