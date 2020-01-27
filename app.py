@@ -63,20 +63,12 @@ def main():
 @app.route('/data', methods=['POST'])
 def mm():
     resp = json.loads(request.data.decode('utf-8'))
-    print(resp)
-    # n = int(resp["npoints"])
-    for k, v in resp.items():
-        if k!="use_r_h":
-            resp[k] = float(v)
-        else:
-            exec("resp[k]="+resp[k])
     args = {}
-    to_float = ["m", "b", "v0", "y0", "f_max", "target", "t0", "tmax", "fuel_loss"]
+    to_float = ["m", "b", "v0", "y0", "f_max", "target", "t0", "tmax"]
     for v in to_float:
         args[v] = float(resp[v])
     args["ref_fun"] = rise(float(resp["v_opt"]))
-
-    print(args)
+    args["f_max"] *= 1000
     plot = plot1(**args)
     return Response(plot)
 

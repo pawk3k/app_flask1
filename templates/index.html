@@ -25,21 +25,23 @@
     }
     </script>
     <style>
-.form input {
+form input {
   font-family: "Roboto", sans-serif;
   outline: 0;
-  background: #f2f2f2;
-  width: 100%;
+  border-radius: 10px;
+  background-color: aliceblue;
+  width:100%;
   border: 0;
-  margin: 0 0 15px;
-  padding: 15px;
+  padding: 5px;
   box-sizing: border-box;
-  font-size: 14px;
+  font-size: 10px;
+  color:black;
 }
 
     p{
-        width: 150px;
+        width: 200px;
         height: 40px;
+        color:aliceblue;
     }
 
 
@@ -48,9 +50,7 @@
         {#width: 100%;#}
         {#height: 100%;#}
         background-image: url("/static/shar.jpg");
-        {#backgorund-size:contain;#}
-          background-size: cover;
-        background-repeat: no-repeat;
+        background-size: cover;
     }
     </style>
 
@@ -61,17 +61,17 @@
 		  <div class="row align-items-center">
 		    <div class="col-md-4 align-self-center">
                     <form id="forma" class="login-form">
-                        <p>t0: <input name="t0" type="text" value="0"/></p>
-                        <p>tmax: <input name="tmax" type="text" value="40"/></p>
-                        <p>m: <input name="m" type="text" value="750"/></p>
-                        <p>b: <input name="b" type="text" value="190"/></p>
-                        <p>y0: <input name="y0" type="text" value="0"/></p>
-                        <p>v0: <input name="v0" type="text" value="0"/></p>
-                        <p>target: <input name="target" type="text" value="50"/></p>
-                        <p>v_opt: <input name="v_opt" type="text" value="3.5"/></p>
-                        <p>f_max: <input name="f_max" type="text" value="3000"/></p>
-                        <p>fuel_loss: <input name="fuel_loss" type="text" value="0"/></p>
-                        <input  class="btn btn-success" type="button" onclick="reload()" value="send"/>
+                      <p>Czas symulacji [s]:</br><input name="t0" type="text" value="0" style="width: 47%;"/>
+                       - <input name="tmax" type="text" value="200" style="width: 46.5%;"/></p>
+                      <p>Masa balonu [kg]: <input name="m" type="text" value="750"/></p>
+                      <p>Współczynnik oporu <i>b</i> [kg/m]: <input name="b" type="text" value="190"/></p>
+                      <p>Wysokość początkowa [m]: <input name="y0" type="text" value="0"/></p>
+                      <p>Prędkość początkowa [m/s]: <input name="v0" type="text" value="0"/></p>
+                      <p>Wysokość docelowa [m]: <input name="target" type="text" value="50"/></p>
+                      <p>Optymalna prędkość [m/s]: <input name="v_opt" type="text" value="3.5"/></p>
+                      <p>Maksymalna siła [kN]: <input name="f_max" type="text" value="10.5"/></p>
+                      {#<p>Utrata paliwa [kg/s]: <input name="fuel_loss" type="text" value="0"/></p>#}
+                      <input  class="btn btn-success" type="button" onclick="reload()" value="Symuluj" style="width: auto;"/>
             </form>
 		    </div>
 		    <div class="col-md-8">
