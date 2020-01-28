@@ -59,7 +59,7 @@ Bootstrap(app)
 def main():
     return render_template('index.html')
 @app.route('/v2')
-def main():
+def main2():
     return render_template('index2.html')
 
 
@@ -74,9 +74,11 @@ def mm():
     args["f_max"] *= 1000
     plot = plot1(**args)
     return Response(plot)
-@app.route('/data2', methods=['POST'])
+
 import ast
-def mm():
+
+@app.route('/data2', methods=['POST'])
+def mm2():
     resp = json.loads(request.data.decode('utf-8'))
     args = {}
     to_float = ["m", "b", "v0", "f_max", "t0", "tmax"]
@@ -84,7 +86,7 @@ def mm():
         args[v] = float(resp[v])
     v_opt = float(resp["v_opt"])
 
-    args["ref_fun"] = levels(v_opt, ast.list_eval(resp["ptlist"]))
+    args["ref_fun"] = levels(v_opt, ast.literal_eval(resp["ptlist"]))
     args["f_max"] *= 1000
     plot = plot1(**args)
     return Response(plot)
