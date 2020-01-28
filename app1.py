@@ -82,7 +82,9 @@ def mm():
     to_float = ["m", "b", "v0", "f_max", "t0", "tmax"]
     for v in to_float:
         args[v] = float(resp[v])
-    args["ref_fun"] = foo(ast.list_eval(resp["ptlist"]))
+    v_opt = float(resp["v_opt"])
+
+    args["ref_fun"] = levels(v_opt, ast.list_eval(resp["ptlist"]))
     args["f_max"] *= 1000
     plot = plot1(**args)
     return Response(plot)
