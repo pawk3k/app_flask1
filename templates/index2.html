@@ -1,0 +1,88 @@
+{% extends "bootstrap/base.html" %}
+<!DOCTYPE html>
+<html>
+{% block content %}
+
+<head>
+    <script>
+    function reload() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("mimg").innerHTML = this.responseText;
+            }
+        };
+        xhttp.open("POST", "/data", true);
+        const form1= document.getElementById('forma');
+        let elements = form1.querySelector("input");
+        const len = document.getElementById("forma").length;
+        const elements1 = document.getElementById("forma").elements;
+        let obj = {};
+        for (let i = 0; i < len-1; i++) {
+            obj[elements1[i].name] = elements1[i].value
+		}
+        xhttp.send(JSON.stringify(obj));
+    }
+    </script>
+    <style>
+form input {
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  border-radius: 10px;
+  background-color: aliceblue;
+  width:100%;
+  border: 0;
+  padding: 5px;
+  box-sizing: border-box;
+  font-size: 10px;
+  color:black;
+}
+
+    p{
+        width: 200px;
+        height: 40px;
+        color:aliceblue;
+    }
+
+
+    body{
+        padding-bottom: 10.5%;
+        {#width: 100%;#}
+        {#height: 100%;#}
+        background-image: url("/static/shar.jpg");
+        background-size: cover;
+    }
+    </style>
+
+</head>
+<body>
+    <div class="body-content">
+		<div class="container-fluid">
+		  <div class="row align-items-center">
+		    <div class="col-md-4 align-self-center">
+                    <form id="forma" class="login-form">
+                      <p>Czas symulacji [s]:</br><input name="t0" type="text" value="0" style="width: 47%;"/>
+                       - <input name="tmax" type="text" value="200" style="width: 46.5%;"/></p>
+                      <p>Masa balonu [kg]: <input name="m" type="text" value="750"/></p>
+                      <p>Współczynnik oporu <i>b</i> [kg/m]: <input name="b" type="text" value="190"/></p>
+                      <p>Wysokość początkowa [m]: <input name="y0" type="text" value="0"/></p>
+                      <p>Prędkość początkowa [m/s]: <input name="v0" type="text" value="0"/></p>
+                      <p>Wysokość docelowa [m]: <input name="target" type="text" value="50"/></p>
+                      <p>Optymalna prędkość [m/s]: <input name="v_opt" type="text" value="3.5"/></p>
+                      <p>Maksymalna siła [kN]: <input name="f_max" type="text" value="10.5"/></p>
+                      {#<p>Utrata paliwa [kg/s]: <input name="fuel_loss" type="text" value="0"/></p>#}
+                      <input  class="btn btn-success" type="button" onclick="reload()" value="Symuluj" style="width: auto;"/>
+            </form>
+		    </div>
+		    <div class="col-md-8">
+		              <div class="col">
+            <div id="mimg" class="rounded mx-auto d-block"></div>
+        </div>
+		    </div>
+		  </div>
+		</div>
+    </div>
+        {% endblock content %}
+
+</body>
+</html>
